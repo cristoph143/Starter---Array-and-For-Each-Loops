@@ -1,14 +1,14 @@
 ﻿// initialize variables - graded assignments 
-var currentAssignments = 5;
+int currentAssignments = 5;
 
 // create a string array named studentNames
 var studentNames = new string[] { "Sophia", "Andrew", "Emma", "Logan" };
 
 // initialize variables - scores for each student
-int[] sophiaScores = new int[] { 90, 86, 87, 98, 100 };
-int[] andrewScores = new int[] { 92, 89, 81, 96, 90 };
-int[] emmaScores = new int[] { 91, 85, 87, 98, 68 };
-int[] loganScores = new int[] { 90, 95, 87, 88, 96 };
+int[] sophiaScores = new int[] { 90, 86, 87, 98, 100, 94, 90 };
+int[] andrewScores = new int[] { 92, 89, 81, 96, 90, 89 };
+int[] emmaScores = new int[] { 90, 85, 87, 98, 68, 89, 89, 89 };
+int[] loganScores = new int[] { 90, 95, 87, 88, 96, 96 };
 
 // initialize studentScores array
 var studentScores = new int[10];
@@ -30,10 +30,15 @@ foreach (var name in studentNames)
     int sumAssignmentScores = 0;
     decimal currentStudentGrade = 0;
 
+    int gradeAssignments= 0;
     // loop and add all score in studentScores
     foreach (int score in studentScores)
     {
-        sumAssignmentScores += score;
+        gradeAssignments += 1;
+        if (gradeAssignments <= currentAssignments)
+            sumAssignmentScores += score;
+        else
+            sumAssignmentScores += score / 10;
     }
 
     currentStudentGrade = (decimal)(sumAssignmentScores) / currentAssignments;

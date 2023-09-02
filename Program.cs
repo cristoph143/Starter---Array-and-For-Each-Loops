@@ -13,39 +13,34 @@ int[] loganScores = new int[] { 90, 95, 87, 88, 96 };
 // initialize studentScores array
 var studentScores = new int[10];
 
-var sophiaSum = 0;
-var andrewSum = 0;
-var emmaSum = 0;
-var loganSum = 0;
-
-decimal sophiaScore = 0;
-decimal andrewScore = 0;
-decimal emmaScore = 0;
-decimal loganScore = 0;
-
 Console.WriteLine("Student\t\tGrade\n");
 // loop through student names
 foreach (var name in studentNames)
 {
-    if (name == "Sophia")
-    {
-        // calculate the sum inside a foreach for sophia
-        foreach (int score in sophiaScores)
-        {
-            sophiaSum += score;
-        }
-        sophiaScore = (decimal)(sophiaSum) / currentAssignments;
-        andrewScore = (decimal)andrewSum / currentAssignments;
-        emmaScore = (decimal)emmaSum / currentAssignments;
-        loganScore = (decimal)loganSum / currentAssignments;
-        Console.WriteLine("Sophia:\t\t" + sophiaScore + "\tA-");
-// Console.WriteLine("Andrew:\t\t" + andrewScore + "\tB+");
-// Console.WriteLine("Emma:\t\t" + emmaScore + "\tB");
-// Console.WriteLine("Logan:\t\t" + loganScore + "\tA-");
-        Console.WriteLine("Press the Enter key to continue");
-        Console.ReadLine();
-    }
-}
+    string currentStudent = name;
+    if (currentStudent == "Sophia")
+        studentScores = sophiaScores;
+    else if (currentStudent == "Andrew")
+        studentScores = andrewScores;
+    else if (currentStudent == "Emma")
+        studentScores = emmaScores;
+    else if (currentStudent == "Logan")
+        studentScores = loganScores;
 
+    int sumAssignmentScores = 0;
+    decimal currentStudentGrade = 0;
+
+    // loop and add all score in studentScores
+    foreach (int score in studentScores)
+    {
+        sumAssignmentScores += score;
+    }
+
+    currentStudentGrade = (decimal)(sumAssignmentScores) / currentAssignments;
+
+    Console.WriteLine($"{currentStudent}\t\t{currentStudentGrade}\t?");
+    // Console.ReadLine();
+}
+Console.WriteLine("Press the Enter key to continue");
 
 

@@ -1,6 +1,17 @@
 ﻿// initialize variables - graded assignments 
 
 namespace Starter;
+public class StudentScores
+{
+    public int[] SophiaScores { get; set; }
+    public int[] AndrewScores { get; set; }
+    public int[] EmmaScores { get; set; }
+    public int[] LoganScores { get; set; }
+    public int[] BeckyScores { get; set; }
+    public int[] ChrisScores { get; set; }
+    public int[] EricScores { get; set; }
+    public int[] GregorScores { get; set; }
+}
 
 internal abstract class Starter
 {
@@ -28,89 +39,91 @@ internal abstract class Starter
 // loop through student names
         foreach (var name in studentNames)
         {
-            const int gradeAssignments = 0;
-            var sumAssignmentScores = 0;
-            var studentScores = GetStudentScore(name, sophiaScores, andrewScores, emmaScores, loganScores, beckyScores, chrisScores, ericScores, gregorScores);
+            int gradedExtraCreditAssignments = 0;
+            int examAssignments = 5;
+            int sumExamScores = 0;
+            int sumExtraCreditScores = 0;
+            int gradedAssignments = 0;
+
+            var studentScoresObj = new StudentScores
+            {
+                SophiaScores = sophiaScores,
+                AndrewScores = andrewScores,
+                EmmaScores = emmaScores,
+                LoganScores = loganScores,
+                BeckyScores = beckyScores,
+                ChrisScores = chrisScores,
+                EricScores = ericScores,
+                GregorScores = gregorScores
+            };
+            var studentScores = GetStudentScores(name, studentScoresObj);
+
             // loop and add all score in studentScores
-            sumAssignmentScores = GetSumAssignmentScores(studentScores, gradeAssignments, currentAssignments, sumAssignmentScores);
-            var currentStudentGrade = (decimal)(sumAssignmentScores) / currentAssignments;
+            (sumExamScores, gradedExtraCreditAssignments, sumExtraCreditScores) = GetSumExamScores(studentScores, gradedAssignments, examAssignments, sumExamScores, gradedExtraCreditAssignments, sumExtraCreditScores); 
+            decimal currentStudentExamScore = (decimal)sumExamScores / examAssignments;
+            decimal currentStudentExtraCreditScore = (decimal)(sumExtraCreditScores) / gradedExtraCreditAssignments;
+            decimal currentStudentGrade = (sumExamScores + (decimal)sumExtraCreditScores / 10) / examAssignments;
             currentStudentLetterGrade = GetCurrentStudentLetterGrade(currentStudentGrade, currentStudentLetterGrade);
-            Console.WriteLine($"{name}\t\t0\t\t{currentStudentGrade}\t{currentStudentLetterGrade}\t\t0 (0 pts)");
+            Console.WriteLine($"{name}\t\t{currentStudentExamScore}\t\t{currentStudentGrade}\t{currentStudentLetterGrade}\t{currentStudentExtraCreditScore} ({(((decimal)sumExtraCreditScores / 10) / currentAssignments)} pts)");
         }
         Console.WriteLine("Press the Enter key to continue");
         Console.ReadLine();
-
-        int[] GetStudentScore(string s, int[] ints, int[] andrewScores1, int[] emmaScores1, int[] loganScores1,
-            int[] beckyScores1, int[] chrisScores1, int[] ericScores1, int[] gregorScores1)
+    }
+    private static string GetCurrentStudentLetterGrade(decimal currentStudentGrade1, string currentStudentLetterGrade1)
+    {
+        currentStudentLetterGrade1 = currentStudentGrade1 switch
         {
-            int[] studentScores1 = new int[] { };
-            switch (s)
+            >= 97 => "A+",
+            >= 93 => "A",
+            >= 90 => "A-",
+            >= 87 => "B+",
+            >= 83 => "B",
+            >= 80 => "B-",
+            >= 77 => "C+",
+            >= 73 => "C",
+            >= 70 => "C-",
+            >= 67 => "D+",
+            >= 63 => "D",
+            >= 60 => "D-",
+            _ => currentStudentLetterGrade1
+        };
+
+        return currentStudentLetterGrade1;
+    }
+    private static (int sumExamScores, int gradedExtraCreditAssignments, int sumExtraCreditScores) GetSumExamScores(
+        int[] studentScores, int gradedAssignments, int examAssignments, int sumExamScores,
+        int gradedExtraCreditAssignments, int sumExtraCreditScores)
+    {
+        foreach (int score in studentScores)
+        {
+            gradedAssignments += 1;
+
+            if (gradedAssignments <= examAssignments)
             {
-                case "Sophia":
-                    studentScores1 = ints;
-                    break;
-                case "Andrew":
-                    studentScores1 = andrewScores1;
-                    break;
-                case "Emma":
-                    studentScores1 = emmaScores1;
-                    break;
-                case "Logan":
-                    studentScores1 = loganScores1;
-                    break;
-                case "Becky":
-                    studentScores1 = beckyScores1;
-                    break;
-                case "Chris":
-                    studentScores1 = chrisScores1;
-                    break;
-                case "Eric":
-                    studentScores1 = ericScores1;
-                    break;
-                case "Gregor":
-                    studentScores1 = gregorScores1;
-                    break;
-                default:
-                    return studentScores1;
+                sumExamScores = sumExamScores + score;
             }
-
-            return studentScores1;
-        }
-
-        string GetCurrentStudentLetterGrade(decimal currentStudentGrade1, string currentStudentLetterGrade1)
-        {
-            currentStudentLetterGrade1 = currentStudentGrade1 switch
+            else
             {
-                >= 97 => "A+",
-                >= 93 => "A",
-                >= 90 => "A-",
-                >= 87 => "B+",
-                >= 83 => "B",
-                >= 80 => "B-",
-                >= 77 => "C+",
-                >= 73 => "C",
-                >= 70 => "C-",
-                >= 67 => "D+",
-                >= 63 => "D",
-                >= 60 => "D-",
-                _ => currentStudentLetterGrade1
-            };
-
-            return currentStudentLetterGrade1;
-        }
-
-        int GetSumAssignmentScores(int[] ints1, int i, int currentAssignments1, int sumAssignmentScores1)
-        {
-            foreach (var score in ints1)
-            {
-                i += 1;
-                if (i <= currentAssignments1)
-                    sumAssignmentScores1 += score;
-                else
-                    sumAssignmentScores1 += score / 10;
+                gradedExtraCreditAssignments += 1;
+                sumExtraCreditScores += score;
             }
-
-            return sumAssignmentScores1;
         }
+
+        return (sumExamScores, gradedExtraCreditAssignments, sumExtraCreditScores);
+    }
+    private static int[] GetStudentScores(string name, StudentScores studentScores)
+    {
+        return name switch
+        {
+            "Sophia" => studentScores.SophiaScores,
+            "Andrew" => studentScores.AndrewScores,
+            "Emma" => studentScores.EmmaScores,
+            "Logan" => studentScores.LoganScores,
+            "Becky" => studentScores.BeckyScores,
+            "Chris" => studentScores.ChrisScores,
+            "Eric" => studentScores.EricScores,
+            "Gregor" => studentScores.GregorScores,
+            _ => throw new ArgumentException($"Invalid name: {name}")
+        };
     }
 }

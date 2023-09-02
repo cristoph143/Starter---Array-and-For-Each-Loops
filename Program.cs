@@ -2,14 +2,19 @@
 int currentAssignments = 5;
 
 // create a string array named studentNames
-var studentNames = new string[] { "Sophia", "Andrew", "Emma", "Logan" };
+string[] studentNames = new string[] { "Sophia", "Andrew", "Emma", "Logan", "Becky", "Chris", "Eric", "Gregor" };
 
 // initialize variables - scores for each student
 int[] sophiaScores = new int[] { 90, 86, 87, 98, 100, 94, 90 };
 int[] andrewScores = new int[] { 92, 89, 81, 96, 90, 89 };
 int[] emmaScores = new int[] { 90, 85, 87, 98, 68, 89, 89, 89 };
 int[] loganScores = new int[] { 90, 95, 87, 88, 96, 96 };
+int[] beckyScores = new int[] { 92, 91, 90, 91, 92, 92, 92 };
+int[] chrisScores = new int[] { 84, 86, 88, 90, 92, 94, 96, 98 };
+int[] ericScores = new int[] { 80, 90, 100, 80, 90, 100, 80, 90 };
+int[] gregorScores = new int[] { 91, 91, 91, 91, 91, 91, 91 };    
 
+// Student names
 // initialize studentScores array
 var studentScores = new int[10];
 string currentStudentLetterGrade = "";
@@ -26,6 +31,16 @@ foreach (var name in studentNames)
         studentScores = emmaScores;
     else if (currentStudent == "Logan")
         studentScores = loganScores;
+    else if (currentStudent == "Becky")
+        studentScores = beckyScores;
+    else if (currentStudent == "Chris")
+        studentScores = chrisScores;
+    else if (currentStudent == "Eric")
+        studentScores = ericScores;
+    else if (currentStudent == "Gregor")
+        studentScores = gregorScores;
+    else
+        continue;
 
     int sumAssignmentScores = 0;
     decimal currentStudentGrade = 0;

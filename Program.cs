@@ -24,7 +24,7 @@ internal abstract class Starter
 // Student names
 // initialize studentScores array
         string currentStudentLetterGrade = "";
-        Console.WriteLine("Student\t\tGrade\n");
+        Console.WriteLine("Student\t\tExam Score\t\tGrade\t\tExtra Credit\n");
 // loop through student names
         foreach (var name in studentNames)
         {
@@ -35,7 +35,7 @@ internal abstract class Starter
             sumAssignmentScores = GetSumAssignmentScores(studentScores, gradeAssignments, currentAssignments, sumAssignmentScores);
             var currentStudentGrade = (decimal)(sumAssignmentScores) / currentAssignments;
             currentStudentLetterGrade = GetCurrentStudentLetterGrade(currentStudentGrade, currentStudentLetterGrade);
-            Console.WriteLine($"{name}\t\t{currentStudentGrade}\t{currentStudentLetterGrade}");
+            Console.WriteLine($"{name}\t\t0\t\t{currentStudentGrade}\t{currentStudentLetterGrade}\t\t0 (0 pts)");
         }
         Console.WriteLine("Press the Enter key to continue");
         Console.ReadLine();

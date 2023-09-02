@@ -35,7 +35,18 @@ internal abstract class Starter
 // Student names
 // initialize studentScores array
         string currentStudentLetterGrade = "";
-        Console.WriteLine("Student\t\tExam Score\t\tGrade\t\tExtra Credit\n");
+        var studentScoresObj = new StudentScores
+        {
+            SophiaScores = sophiaScores,
+            AndrewScores = andrewScores,
+            EmmaScores = emmaScores,
+            LoganScores = loganScores,
+            BeckyScores = beckyScores,
+            ChrisScores = chrisScores,
+            EricScores = ericScores,
+            GregorScores = gregorScores
+        };
+        Console.WriteLine("Student\t\tExam Score\tGrade\t\tExtra Credit\n");
 // loop through student names
         foreach (var name in studentNames)
         {
@@ -45,17 +56,6 @@ internal abstract class Starter
             int sumExtraCreditScores = 0;
             int gradedAssignments = 0;
 
-            var studentScoresObj = new StudentScores
-            {
-                SophiaScores = sophiaScores,
-                AndrewScores = andrewScores,
-                EmmaScores = emmaScores,
-                LoganScores = loganScores,
-                BeckyScores = beckyScores,
-                ChrisScores = chrisScores,
-                EricScores = ericScores,
-                GregorScores = gregorScores
-            };
             var studentScores = GetStudentScores(name, studentScoresObj);
 
             // loop and add all score in studentScores

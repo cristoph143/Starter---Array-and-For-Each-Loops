@@ -12,7 +12,7 @@ int[] loganScores = new int[] { 90, 95, 87, 88, 96 };
 
 // initialize studentScores array
 var studentScores = new int[10];
-
+string currentStudentLetterGrade = "";
 Console.WriteLine("Student\t\tGrade\n");
 // loop through student names
 foreach (var name in studentNames)
@@ -38,9 +38,44 @@ foreach (var name in studentNames)
 
     currentStudentGrade = (decimal)(sumAssignmentScores) / currentAssignments;
 
-    Console.WriteLine($"{currentStudent}\t\t{currentStudentGrade}\t?");
-    // Console.ReadLine();
+    if (currentStudentGrade >= 97)
+        currentStudentLetterGrade = "A+";
+
+    else if (currentStudentGrade >= 93)
+        currentStudentLetterGrade = "A";
+
+    else if (currentStudentGrade >= 90)
+        currentStudentLetterGrade = "A-";
+
+    else if (currentStudentGrade >= 87)
+        currentStudentLetterGrade = "B+";
+
+    else if (currentStudentGrade >= 83)
+        currentStudentLetterGrade = "B";
+
+    else if (currentStudentGrade >= 80)
+        currentStudentLetterGrade = "B-";
+
+    else if (currentStudentGrade >= 77)
+        currentStudentLetterGrade = "C+";
+
+    else if (currentStudentGrade >= 73)
+        currentStudentLetterGrade = "C";
+
+    else if (currentStudentGrade >= 70)
+        currentStudentLetterGrade = "C-";
+
+    else if (currentStudentGrade >= 67)
+        currentStudentLetterGrade = "D+";
+
+    else if (currentStudentGrade >= 63)
+        currentStudentLetterGrade = "D";
+
+    else if (currentStudentGrade >= 60)
+        currentStudentLetterGrade = "D-";
+    Console.WriteLine($"{currentStudent}\t\t{currentStudentGrade}\t{currentStudentLetterGrade}");
 }
 Console.WriteLine("Press the Enter key to continue");
+Console.ReadLine();
 
 
